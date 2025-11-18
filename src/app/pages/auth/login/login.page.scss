@@ -1,0 +1,134 @@
+// Variables de diseño (Coherencia con Register y Landing)
+$primary-blue: #00377d; // Azul Tigo
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$error-red: #ef4444;
+
+.custom-bg {
+  --background: #ffffff;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%; // Centra verticalmente en pantallas altas
+  padding: 20px 10px;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 40px;
+
+  .logo-placeholder {
+    width: 80px;
+    height: 80px;
+    background: #f3f4f6;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    img {
+      width: 60%;
+      height: auto;
+    }
+  }
+
+  .page-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: $primary-blue;
+    margin: 0 0 10px;
+  }
+
+  .page-subtitle {
+    font-size: 16px;
+    color: $text-light;
+    margin: 0;
+  }
+}
+
+.input-group {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    font-weight: 600;
+    color: $text-dark;
+    margin-bottom: 8px;
+    font-size: 14px;
+    margin-left: 4px;
+  }
+
+  ion-input {
+    --background: #ffffff;
+    --border-color: #d1d5db;
+    --border-radius: 12px;
+    --placeholder-color: #9ca3af;
+    --padding-start: 16px;
+    min-height: 56px; // Altura cómoda para tocar
+
+    &.has-focus {
+      --border-color: #{$primary-blue};
+      --highlight-color-focused: #{$primary-blue};
+    }
+  }
+
+  .error-msg {
+    color: $error-red;
+    font-size: 12px;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    
+    ion-icon {
+      font-size: 14px;
+    }
+  }
+}
+
+.btn-login {
+  --background: #{$primary-blue};
+  --border-radius: 12px;
+  --color: white;
+  font-weight: 600;
+  margin-top: 30px;
+  height: 56px;
+  font-size: 16px;
+  text-transform: none;
+  box-shadow: 0 4px 6px -1px rgba(0, 55, 125, 0.2);
+}
+
+.footer-links {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+  color: $text-light;
+
+  a {
+    color: $primary-blue;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .guest-link {
+    margin-top: 15px;
+    a {
+      color: $text-light;
+      font-weight: normal;
+      text-decoration: underline;
+    }
+  }
+}
+
+// Responsive para pantallas grandes
+@media (min-width: 768px) {
+  .login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    justify-content: center;
+  }
+}

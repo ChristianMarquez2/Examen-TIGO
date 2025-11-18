@@ -1,0 +1,35 @@
+$primary-blue: #00377d;
+$text-inactive: #9ca3af; // Gris suave
+
+ion-tab-bar {
+  --background: #ffffff;
+  --border: 0; // Quitamos borde default feo
+  border-top: 1px solid #f3f4f6; // Borde sutil arriba
+  height: 60px;
+  padding-bottom: 5px; // Espacio extra para no pegar al borde inferior en móviles
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
+}
+
+ion-tab-button {
+  --color: #{$text-inactive};
+  --color-selected: #{$primary-blue};
+  background: transparent;
+
+  ion-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+    transition: transform 0.2s ease;
+  }
+
+  ion-label {
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  // Efecto sutil al seleccionar (el icono salta un poco)
+  &.tab-selected {
+    ion-icon {
+      transform: translateY(-2px);
+    }
+  }
+}

@@ -1,0 +1,39 @@
+<ion-content class="landing-content">
+  
+  <div class="main-container">
+    
+    <!-- Sección Superior: Logo y Texto -->
+    <div class="brand-section">
+      <div class="logo-container">
+        <!-- He puesto una clase para manejar el tamaño, y un onerror por si la imagen no carga -->
+        <img src="assets/logo-tigo-falso.png" alt="Tigo Logo" class="app-logo" 
+             onerror="this.style.display='none'">
+      </div>
+      
+      <h1 class="app-title">Tigo Conecta</h1>
+      <p class="app-slogan">El mundo en tus manos</p>
+    </div>
+
+    <!-- Sección Inferior: Acciones -->
+    <div class="actions-section">
+      
+      <ion-button 
+        expand="block" 
+        class="btn-primary" 
+        [routerLink]="['/login']">
+        Iniciar Sesión / Registro
+      </ion-button>
+      
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        class="btn-secondary" 
+        [routerLink]="['/home']">
+        Ver Catálogo (Invitado)
+      </ion-button>
+
+      <p class="version-text">v1.0.0</p>
+    </div>
+
+  </div>
+</ion-content>

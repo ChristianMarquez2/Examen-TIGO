@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <!-- Este botón solo aparecerá si no estás en la ruta principal de tabs --><ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mi Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="profile-card ion-padding">
+    <ion-avatar class="profile-avatar">
+      <!-- Si el usuario tuviera avatar_url, lo usaríamos aquí --><img [src]="perfil?.avatar_url || 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
+    </ion-avatar>
+
+    <h2 class="profile-name">{{ perfil?.nombre_completo || perfil?.email }} <span *ngIf="perfil?.rol === 'asesor_comercial'">(Asesor)</span></h2>
+    <p class="profile-email">{{ perfil?.email }}</p>
+
+    <form [formGroup]="profileForm">
+      <ion-list lines="none" class="profile-details-list">
+        <ion-item>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-input label="Nombre Completo" labelPlacement="stacked" formControlName="nombre_completo" [readonly]="!editMode"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input label="Email" labelPlacement="stacked" formControlName="email" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+          <ion-input label="Teléfono" labelPlacement="stacked" formControlName="telefono" [readonly]="!editMode"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" *ngIf="!editMode" (click)="toggleEditMode()" color="primary" class="ion-margin-top">
+        Editar Perfil
+      </ion-button>
+
+      <ion-button expand="block" *ngIf="editMode" (click)="saveProfile()" color="success" class="ion-margin-top">
+        Guardar Cambios
+      </ion-button>
+
+      <ion-button expand="block" *ngIf="editMode" (click)="toggleEditMode()" fill="outline" color="medium" class="ion-margin-top">
+        Cancelar Edición
+      </ion-button>
+    </form>
+
+    <ion-button expand="block" color="danger" class="ion-margin-top" (click)="logout()">
+      Cerrar Sesión
+    </ion-button>
+  </div>
+</ion-content>

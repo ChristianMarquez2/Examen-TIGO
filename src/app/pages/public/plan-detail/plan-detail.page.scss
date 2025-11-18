@@ -1,0 +1,147 @@
+// Variables de diseño consistentes
+$primary-blue: #00377d;
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$background-light: #f9fafb;
+
+ion-content {
+  --background: #{$background-light};
+}
+
+// Estilo del Header (Toolbar)
+ion-toolbar {
+  --background: #ffffff;
+  --color: #{$primary-blue};
+  --border-width: 0; // Quita la línea divisoria por defecto
+  
+  ion-title {
+    font-weight: 700;
+    font-size: 18px;
+  }
+  
+  ion-back-button {
+    color: $primary-blue;
+  }
+}
+
+// Sección Hero (Imagen y Título)
+.plan-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 0 0 24px 24px; // Redondeado solo abajo
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+
+  .plan-image {
+    width: 100%;
+    max-width: 250px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 55, 125, 0.15);
+    margin-bottom: 15px;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: $primary-blue;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  .price-tag {
+    font-size: 32px;
+    font-weight: 700;
+    color: $text-dark;
+    display: flex;
+    align-items: baseline;
+    
+    small {
+      font-size: 14px;
+      font-weight: 400;
+      color: $text-light;
+      margin-left: 4px;
+    }
+  }
+}
+
+// Lista de Características
+ion-list {
+  background: transparent;
+  margin-top: 10px;
+  padding: 0 10px;
+
+  ion-item {
+    --background: #ffffff;
+    --border-radius: 12px;
+    --padding-start: 16px;
+    --inner-padding-end: 16px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    
+    ion-label {
+      font-size: 15px;
+      color: $text-dark;
+      display: flex;
+      justify-content: space-between; // Separa etiqueta y valor
+      align-items: center;
+
+      b {
+        color: $primary-blue; // Resalta la etiqueta (Datos, Minutos...)
+        font-weight: 600;
+      }
+
+      span.value {
+        color: $text-dark;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// Descripción
+.description-section {
+  padding: 20px;
+  color: $text-light;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+// Footer y Botón de Acción
+ion-footer {
+  background: #ffffff;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+  padding: 10px 20px;
+
+  ion-toolbar {
+    --background: transparent;
+    --padding-top: 0;
+    --padding-bottom: 0;
+  }
+
+  .btn-action {
+    --border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    height: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+    box-shadow: 0 4px 12px rgba(0, 55, 125, 0.3);
+
+    &.primary {
+      --background: #{$primary-blue};
+      --color: white;
+    }
+    
+    &.secondary {
+      --background: #e5e7eb;
+      --color: #4b5563;
+    }
+  }
+}

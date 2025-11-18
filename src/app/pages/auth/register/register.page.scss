@@ -1,0 +1,90 @@
+// Variable para el azul principal (ajustado al de la imagen)
+$primary-blue: #2563eb; // Un azul rey brillante similar a la imagen
+$bg-grey: #e5e7eb; // Gris para el botón volver
+
+.custom-bg {
+  --background: #ffffff;
+}
+
+.header-nav {
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+// Estilo del botón gris "Volver"
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: $bg-grey;
+  padding: 8px 16px;
+  border-radius: 20px; // Forma de píldora
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  ion-icon {
+    margin-right: 5px;
+    font-size: 16px;
+  }
+
+  &:active {
+    background-color: darken($bg-grey, 10%);
+  }
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 25px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    font-weight: 600; // Semi-bold
+    color: #333;
+    margin-bottom: 8px; // Espacio entre label e input
+    font-size: 14px;
+  }
+
+  ion-input {
+    --background: #ffffff;
+    --border-color: #d1d5db; // Gris suave para el borde inactivo
+    --border-radius: 12px; // Bordes redondeados del input
+    --placeholder-color: #9ca3af;
+    --padding-start: 15px;
+    
+    // Altura del input para que se vea como una caja
+    min-height: 50px; 
+
+    // Cuando el input tiene foco, borde azul
+    &.has-focus {
+      --border-color: #{$primary-blue};
+      --highlight-color-focused: #{$primary-blue};
+    }
+  }
+}
+
+.btn-register {
+  --background: #{$primary-blue};
+  --border-radius: 12px;
+  --color: white;
+  font-weight: 600;
+  margin-top: 30px;
+  height: 50px;
+  font-size: 16px;
+  text-transform: none; // Evita que sea todo mayúsculas
+}
+
+// Ajuste responsive para pantallas grandes
+@media (min-width: 768px) {
+  .register-container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}

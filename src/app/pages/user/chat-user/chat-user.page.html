@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Soporte Tigo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="chat-container">
+    
+    <!-- Mensaje de bienvenida o estado vacío -->
+    <div *ngIf="mensajes.length === 0" class="ion-text-center ion-padding ion-margin-top" style="color: #9ca3af;">
+      <p>Inicia una conversación con un asesor.</p>
+    </div>
+
+    <!-- Lista de Mensajes -->
+    <div *ngFor="let msg of mensajes" 
+         class="message-wrapper" 
+         [ngClass]="{'mine': !msg.es_asesor, 'advisor': msg.es_asesor}">
+      
+      <div class="burbuja">
+        {{ msg.contenido }}
+      </div>
+      <span class="time">{{ msg.created_at | date:'shortTime' }}</span>
+    
+    </div>
+
+    <!-- Indicador 'Escribiendo...' -->
+    <div *ngIf="asesorEscribiendo" class="typing-indicator">
+      <ion-spinner name="dots" color="medium"></ion-spinner>
+      <span>El asesor está escribiendo...</span>
+    </div>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="input-container">
+      <ion-input 
+        [(ngModel)]="nuevoMensaje" 
+        (ionInput)="onTyping()" 
+        placeholder="Escribe tu mensaje..."
+        (keyup.enter)="enviar()">
+      </ion-input>
+      
+      <ion-button 
+        fill="clear" 
+        (click)="enviar()" 
+        [disabled]="!nuevoMensaje.trim()">
+        <ion-icon name="send" color="primary"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

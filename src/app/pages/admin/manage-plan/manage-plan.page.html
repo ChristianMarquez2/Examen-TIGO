@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ planId ? 'Editar Plan' : 'Nuevo Plan' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="planForm" (ngSubmit)="guardarPlan()">
+
+    <div class="ion-text-center ion-margin-bottom">
+      <div class="image-preview" (click)="tomarFoto()" style="background: #f4f4f4; height: 150px; display: flex; align-items: center; justify-content: center; border-radius: 10px; overflow: hidden;">
+        <img *ngIf="imagenSeleccionada" [src]="imagenSeleccionada" style="width: 100%; height: 100%; object-fit: cover;">
+        <div *ngIf="!imagenSeleccionada" class="ion-text-center">
+          <ion-icon name="camera" size="large" color="medium"></ion-icon>
+          <p style="color: #666">Toca para subir foto</p>
+        </div>
+      </div>
+    </div>
+
+    <ion-list-header>Información Básica</ion-list-header>
+    <ion-item>
+      <ion-label position="stacked">Nombre Comercial</ion-label>
+      <ion-input formControlName="nombre" placeholder="Ej: Plan Smart 5GB"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Precio ($)</ion-label>
+      <ion-input type="number" formControlName="precio" placeholder="15.99"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Segmento</ion-label>
+      <ion-select formControlName="segmento" interface="popover">
+        <ion-select-option value="Básico / Entrada">Básico / Entrada</ion-select-option>
+        <ion-select-option value="Medio / Estándar">Medio / Estándar</ion-select-option>
+        <ion-select-option value="Premium / Alto">Premium / Alto</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-list-header>Características Técnicas</ion-list-header>
+    <ion-item>
+      <ion-label position="stacked">Datos Móviles</ion-label>
+      <ion-input formControlName="datos" placeholder="Ej: 5 GB (4G LTE)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Minutos Voz</ion-label>
+      <ion-input formControlName="minutos" placeholder="Ej: 100 minutos"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Velocidad</ion-label>
+      <ion-input formControlName="velocidad" placeholder="Ej: Hasta 50 Mbps"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Roaming</ion-label>
+      <ion-input formControlName="roaming"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Descripción / Público Objetivo</ion-label>
+      <ion-textarea formControlName="descripcion" rows="3"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" class="ion-margin-top" [disabled]="planForm.invalid">
+      {{ planId ? 'Actualizar Plan' : 'Crear Plan' }}
+    </ion-button>
+
+  </form>
+</ion-content>

@@ -1,0 +1,42 @@
+.mensaje-propio {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; // A la derecha
+  margin-bottom: 10px;
+
+  .burbuja {
+    background-color: #5260ff; // Azul Tigo (o Tertiary)
+    color: white;
+    padding: 10px 15px;
+    border-radius: 15px 15px 0 15px;
+    max-width: 80%;
+  }
+}
+
+.mensaje-cliente {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; // A la izquierda
+  margin-bottom: 10px;
+
+  .burbuja {
+    background-color: #e0e0e0;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 15px 15px 15px 0;
+    max-width: 80%;
+  }
+}
+
+small {
+  font-size: 0.7rem;
+  color: #888;
+  margin-top: 2px;
+}
+
+.typing-indicator {
+  font-style: italic;
+  color: #888;
+  font-size: 0.8rem;
+  margin-left: 10px;
+}

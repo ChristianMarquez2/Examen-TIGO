@@ -1,0 +1,53 @@
+<ion-tabs>
+  <!-- Slot top para que el contenido se renderice arriba -->
+  <ion-tab-bar slot="bottom">
+
+    <!-- === MENÚ PARA USUARIO REGISTRADO === -->
+    <ng-container *ngIf="!isAsesor">
+      <ion-tab-button tab="home">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="my-plans">
+        <ion-icon name="cart"></ion-icon>
+        <ion-label>Mis Planes</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="chat-user">
+        <ion-icon name="chatbubble"></ion-icon>
+        <ion-label>Chat</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="profile">
+        <ion-icon name="person"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+    </ng-container>
+
+
+    <!-- === MENÚ PARA ASESOR COMERCIAL === -->
+    <ng-container *ngIf="isAsesor">
+      <ion-tab-button tab="dashboard">
+        <ion-icon name="layers"></ion-icon> <!-- Icono de Planes/Caja -->
+        <ion-label>Planes</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="requests">
+        <ion-icon name="clipboard"></ion-icon>
+        <ion-label>Solicitudes</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="chat-list">
+        <ion-icon name="chatbubbles"></ion-icon>
+        <ion-label>Chats</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="profile">
+        <ion-icon name="person"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+    </ng-container>
+
+  </ion-tab-bar>
+</ion-tabs>

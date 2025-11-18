@@ -1,0 +1,68 @@
+<ion-content [fullscreen]="true" class="ion-padding custom-bg">
+  
+  <div class="login-container">
+    
+    <!-- Encabezado con Logo/Texto -->
+    <div class="header-section">
+      <div class="logo-placeholder">
+        <img src="assets/logo-tigo-falso.png" alt="Tigo" onerror="this.style.display='none'">
+      </div>
+      <h1 class="page-title">Bienvenido</h1>
+      <p class="page-subtitle">Ingresa a tu cuenta para continuar</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      
+      <!-- Email -->
+      <div class="input-group">
+        <label>Correo Electrónico</label>
+        <ion-input 
+          mode="md"
+          fill="outline" 
+          type="email" 
+          placeholder="tu@email.com" 
+          formControlName="email"
+          shape="round">
+        </ion-input>
+        <!-- Error Message -->
+        <div class="error-msg" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+          <ion-icon name="alert-circle-outline"></ion-icon> Correo inválido
+        </div>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="input-group">
+        <label>Contraseña</label>
+        <ion-input 
+          mode="md"
+          fill="outline" 
+          type="password" 
+          placeholder="********" 
+          formControlName="password"
+          shape="round">
+        </ion-input>
+        <!-- Error Message -->
+        <div class="error-msg" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+          <ion-icon name="alert-circle-outline"></ion-icon> Mínimo 6 caracteres
+        </div>
+      </div>
+
+      <!-- Botón Ingresar -->
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        class="btn-login"
+        [disabled]="loginForm.invalid">
+        Ingresar
+      </ion-button>
+
+    </form>
+
+    <!-- Footer Links -->
+    <div class="footer-links">
+      <p>¿No tienes cuenta? <a [routerLink]="['/register']">Regístrate aquí</a></p>
+      <p class="guest-link"><a [routerLink]="['/landing']">Volver al inicio</a></p>
+    </div>
+
+  </div>
+</ion-content>

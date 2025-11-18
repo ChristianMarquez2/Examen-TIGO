@@ -1,0 +1,19 @@
+<ion-header><ion-toolbar><ion-title>Mis Contrataciones</ion-title></ion-toolbar></ion-header>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-card *ngFor="let item of contrataciones">
+      <ion-card-header>
+        <ion-card-subtitle>Contratado: {{ item.created_at | date }}</ion-card-subtitle>
+        <ion-card-title>{{ item.planes_moviles.nombre }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Estado: <ion-badge color="success">{{ item.estado }}</ion-badge>
+        <br><br>
+        <ion-button expand="block" fill="outline" (click)="irAlChat()">
+          <ion-icon name="chatbubbles" slot="start"></ion-icon>
+          Chat con Soporte
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

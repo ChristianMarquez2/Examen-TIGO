@@ -3,9 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: true,
+  supabase: {
+    url: 'https://dergyhqowefnlvlknfwf.supabase.co',
+    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRlcmd5aHFvd2Vmbmx2bGtuZndmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0NzA0MTcsImV4cCI6MjA3OTA0NjQxN30.MD6fk40J1A7ybN-ejV3ac9Un0YDsONgKQuQFsLpJMXs'
+  }
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

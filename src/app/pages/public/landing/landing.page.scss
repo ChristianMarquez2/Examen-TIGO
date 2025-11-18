@@ -1,0 +1,89 @@
+// Color principal de la marca
+$brand-blue: #00377d;
+$white: #ffffff;
+
+.landing-content {
+  --background: #{$brand-blue};
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; // Separa contenido arriba y botones abajo
+  height: 100%;
+  padding: 40px 30px; // Buen espaciado lateral
+  text-align: center;
+  color: $white;
+}
+
+.brand-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1; // Ocupa el espacio disponible para empujar botones abajo
+  margin-bottom: 20px;
+
+  .logo-container {
+    background: rgba(255, 255, 255, 0.1); // Círculo sutil detrás del logo
+    border-radius: 50%;
+    padding: 20px;
+    margin-bottom: 30px;
+    
+    .app-logo {
+      width: 120px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2)); // Sombra suave al logo
+    }
+  }
+
+  .app-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  .app-slogan {
+    font-size: 18px;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-top: 10px;
+  }
+}
+
+.actions-section {
+  width: 100%;
+  max-width: 400px; // Evita que los botones sean enormes en tablets
+  margin: 0 auto; // Centra horizontalmente
+  padding-bottom: 20px;
+
+  ion-button {
+    --border-radius: 12px; // Botones redondeados modernos
+    height: 55px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-transform: none;
+    
+    &.btn-primary {
+      --background: #{$white};
+      --color: #{$brand-blue};
+      --background-hover: #f0f0f0;
+    }
+
+    &.btn-secondary {
+      --border-color: #{$white};
+      --border-width: 2px;
+      --color: #{$white};
+      --background-hover: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .version-text {
+    font-size: 12px;
+    opacity: 0.5;
+    margin-top: 20px;
+  }
+}
