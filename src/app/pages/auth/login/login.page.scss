@@ -1,65 +1,78 @@
 // Variables de diseño (Coherencia con Register y Landing)
-$primary-blue: #00377d; // Azul Tigo
+$primary-blue: #00377d; // Azul Tigo principal
+$secondary-blue: #0056b3; // Un azul un poco más vibrante para focos/links
+$primary-green: #00a87f; // Un verde fresco y moderno
 $text-dark: #1f2937;
 $text-light: #6b7280;
 $error-red: #ef4444;
+$background-light: #f4f6f9; // Fondo sutilmente grisáceo
 
+// --- Contenedor Principal y Fondo ---
 .custom-bg {
-  --background: #ffffff;
+  // Fondo más interesante que un simple blanco puro, pero sigue siendo claro
+  --background: #{$background-light}; 
 }
 
 .login-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100%; // Centra verticalmente en pantallas altas
-  padding: 20px 10px;
+  min-height: 100%;
+  padding: 30px 20px;
+  background: white; // El formulario y cabecera tendrán un fondo blanco
+  border-radius: 20px; // Esquinas redondeadas para un look más suave
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); // Sombra elegante y suave
 }
 
+// --- Encabezado ---
 .header-section {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px; // Más espacio para respirar
 
   .logo-placeholder {
-    width: 80px;
-    height: 80px;
-    background: #f3f4f6;
+    width: 90px; // Un poco más grande
+    height: 90px;
+    background: #e3f6f1; // Fondo suave con el color verde
     border-radius: 50%;
     margin: 0 auto 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    // Sombra sutil para darle profundidad
+    box-shadow: 0 4px 10px rgba(0, 168, 127, 0.2); 
     
     img {
-      width: 60%;
+      width: 65%;
       height: auto;
     }
   }
 
   .page-title {
-    font-size: 32px;
-    font-weight: 800;
+    font-size: 34px;
+    font-weight: 900; // Un poco más audaz
     color: $primary-blue;
-    margin: 0 0 10px;
+    margin: 0 0 8px;
   }
 
   .page-subtitle {
-    font-size: 16px;
+    font-size: 17px;
     color: $text-light;
     margin: 0;
+    font-weight: 400;
   }
 }
 
+// --- Inputs del Formulario ---
 .input-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px; // Más espacio
 
   label {
     display: block;
-    font-weight: 600;
+    font-weight: 700; // Más negrita
     color: $text-dark;
     margin-bottom: 8px;
-    font-size: 14px;
-    margin-left: 4px;
+    font-size: 15px;
+    margin-left: 6px;
   }
 
   ion-input {
@@ -67,68 +80,98 @@ $error-red: #ef4444;
     --border-color: #d1d5db;
     --border-radius: 12px;
     --placeholder-color: #9ca3af;
-    --padding-start: 16px;
-    min-height: 56px; // Altura cómoda para tocar
+    --padding-start: 18px;
+    min-height: 60px; // Un poco más alto
+    font-size: 16px;
+    // Sombra interior sutil para el efecto de hundimiento
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 
+    // Borde más grueso y color primario en el foco
     &.has-focus {
-      --border-color: #{$primary-blue};
-      --highlight-color-focused: #{$primary-blue};
+      --border-color: #{$secondary-blue}; 
+      --highlight-color-focused: #{$secondary-blue};
+      border: 2px solid #{$secondary-blue}; // Borde sólido más visible
+      box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2), inset 0 1px 3px rgba(0, 0, 0, 0.05); // Efecto de foco más pronunciado
     }
   }
 
   .error-msg {
     color: $error-red;
-    font-size: 12px;
-    margin-top: 6px;
+    font-size: 13px;
+    margin-top: 8px;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
+    font-weight: 500;
     
     ion-icon {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 }
 
+// --- Botón Principal ---
 .btn-login {
-  --background: #{$primary-blue};
+  --background: #{$primary-green}; // Usamos el verde como color de acción principal
+  --background-activated: #{darken($primary-green, 10%)};
   --border-radius: 12px;
   --color: white;
-  font-weight: 600;
-  margin-top: 30px;
-  height: 56px;
-  font-size: 16px;
+  font-weight: 700;
+  margin-top: 40px; // Más espacio
+  height: 58px; // Altura cómoda
+  font-size: 18px; // Texto un poco más grande
   text-transform: none;
-  box-shadow: 0 4px 6px -1px rgba(0, 55, 125, 0.2);
+  // Sombra más elegante y acorde al verde
+  box-shadow: 0 8px 15px -3px rgba(0, 168, 127, 0.4); 
+
+  // Estilo para el botón deshabilitado
+  &[disabled] {
+    --background: #d1d5db;
+    opacity: 0.7;
+    box-shadow: none;
+  }
 }
 
+// --- Links de Pie de Página ---
 .footer-links {
   text-align: center;
-  margin-top: 40px;
-  font-size: 14px;
+  margin-top: 50px; 
+  font-size: 15px;
   color: $text-light;
 
   a {
-    color: $primary-blue;
+    color: $secondary-blue; // Usamos un azul más claro/vibrante para los links
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
+    transition: color 0.3s;
+    &:hover {
+      color: $primary-green; // Efecto hover con el verde
+    }
   }
 
   .guest-link {
-    margin-top: 15px;
+    margin-top: 18px;
+    font-size: 14px;
     a {
       color: $text-light;
-      font-weight: normal;
+      font-weight: 500;
       text-decoration: underline;
     }
   }
 }
 
-// Responsive para pantallas grandes
+// --- Responsive para pantallas grandes (manteniendo el centrado) ---
 @media (min-width: 768px) {
   .login-container {
-    max-width: 400px;
+    max-width: 440px; // Un poco más ancho para una mejor presentación de la tarjeta
     margin: 0 auto;
+    justify-content: center;
+    padding: 40px; // Más padding interno
+  }
+  .custom-bg {
+    // Para centrar en la pantalla en web
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
 }

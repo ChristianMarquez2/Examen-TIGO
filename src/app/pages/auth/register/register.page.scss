@@ -1,90 +1,130 @@
-// Variable para el azul principal (ajustado al de la imagen)
-$primary-blue: #2563eb; // Un azul rey brillante similar a la imagen
-$bg-grey: #e5e7eb; // Gris para el botón volver
+// --- Variables de Diseño (Mismas que Login para consistencia) ---
+$primary-blue: #00377d; // Azul Tigo
+$secondary-blue: #0056b3; 
+$primary-green: #00a87f; // Verde Tigo
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$background-light: #f4f6f9;
+$surface-white: #ffffff;
 
+// --- Fondo General ---
 .custom-bg {
-  --background: #ffffff;
+  --background: #{$background-light};
 }
 
+// --- Navegación Superior (Botón Volver) ---
 .header-nav {
   margin-bottom: 20px;
-  margin-top: 10px;
+  padding: 10px 5px; // Un poco de margen lateral visual
 }
 
-// Estilo del botón gris "Volver"
 .back-button {
   display: inline-flex;
   align-items: center;
-  background-color: $bg-grey;
-  padding: 8px 16px;
-  border-radius: 20px; // Forma de píldora
-  color: #333;
-  font-weight: 500;
-  font-size: 14px;
+  background-color: transparent; // Más limpio sin fondo gris
+  color: $text-light;
+  font-weight: 600;
+  font-size: 15px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
+  padding: 8px 0;
 
   ion-icon {
-    margin-right: 5px;
-    font-size: 16px;
+    margin-right: 8px;
+    font-size: 20px;
+    color: $primary-blue; // El icono en azul para destacar
   }
 
-  &:active {
-    background-color: darken($bg-grey, 10%);
+  &:hover {
+    color: $primary-blue;
+    transform: translateX(-3px); // Pequeña animación al pasar el mouse
   }
+}
+
+// --- Contenedor Principal (Efecto Tarjeta) ---
+.register-container {
+  background: $surface-white;
+  padding: 30px 25px;
+  border-radius: 24px; // Bordes muy redondeados
+  box-shadow: 0 10px 40px -10px rgba(0, 55, 125, 0.1); // Sombra azulada muy sutil
+  margin-bottom: 30px; // Espacio al final para scroll
 }
 
 .page-title {
-  font-size: 28px;
-  font-weight: bold;
-  color: #000;
-  margin-bottom: 25px;
+  font-size: 32px;
+  font-weight: 800;
+  color: $primary-blue;
+  margin-bottom: 10px;
+  margin-top: 0;
+  text-align: center; // Centrado queda mejor en la tarjeta
 }
 
+// --- Inputs del Formulario ---
 .input-group {
   margin-bottom: 20px;
 
   label {
     display: block;
-    font-weight: 600; // Semi-bold
-    color: #333;
-    margin-bottom: 8px; // Espacio entre label e input
+    font-weight: 700;
+    color: $text-dark;
+    margin-bottom: 8px;
     font-size: 14px;
+    margin-left: 6px;
   }
 
   ion-input {
-    --background: #ffffff;
-    --border-color: #d1d5db; // Gris suave para el borde inactivo
-    --border-radius: 12px; // Bordes redondeados del input
+    --background: #f9fafb; // Un fondo muy sutil dentro del input
+    --border-color: #e5e7eb;
+    --border-radius: 16px; // Más redondeado
     --placeholder-color: #9ca3af;
-    --padding-start: 15px;
+    --padding-start: 20px;
     
-    // Altura del input para que se vea como una caja
-    min-height: 50px; 
+    // Altura cómoda
+    min-height: 58px; 
+    font-size: 16px;
 
-    // Cuando el input tiene foco, borde azul
+    // Efecto al escribir
     &.has-focus {
-      --border-color: #{$primary-blue};
-      --highlight-color-focused: #{$primary-blue};
+      --background: #ffffff;
+      --border-color: #{$secondary-blue};
+      border: 1.5px solid #{$secondary-blue};
+      box-shadow: 0 4px 12px rgba(0, 55, 125, 0.08); // Elevación suave al foco
     }
   }
 }
 
+// --- Botón de Acción ---
 .btn-register {
-  --background: #{$primary-blue};
-  --border-radius: 12px;
+  --background: #{$primary-green}; // Verde para acción positiva
+  --background-activated: #{darken($primary-green, 10%)};
+  --border-radius: 16px;
   --color: white;
-  font-weight: 600;
-  margin-top: 30px;
-  height: 50px;
-  font-size: 16px;
-  text-transform: none; // Evita que sea todo mayúsculas
+  font-weight: 700;
+  margin-top: 35px;
+  height: 58px;
+  font-size: 18px;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  box-shadow: 0 10px 20px -5px rgba(0, 168, 127, 0.4); // Sombra verde brillante
+
+  &[disabled] {
+    --background: #d1d5db;
+    box-shadow: none;
+    opacity: 0.8;
+  }
 }
 
-// Ajuste responsive para pantallas grandes
+// --- Responsive Desktop ---
 @media (min-width: 768px) {
   .register-container {
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 480px; // Un poco más ancho que login para acomodar los datos
+    margin: 40px auto; // Centrado vertical y horizontal
+  }
+  
+  // Ocultar el header nav en desktop si prefieres un layout diferente, 
+  // o ajustarlo para que esté alineado con la tarjeta
+  .header-nav {
+    max-width: 480px;
+    margin: 0 auto 10px;
   }
 }

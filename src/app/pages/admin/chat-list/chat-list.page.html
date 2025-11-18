@@ -5,42 +5,39 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+
   <div class="ion-padding-top">
-    <ion-list lines="full">
-      
+
+    <ion-list lines="none">
+
       <ion-list-header>
         <ion-label>Clientes Registrados ({{ usuariosConChat.length }})</ion-label>
       </ion-list-header>
 
-      <!-- Iteramos sobre la lista de usuarios cargada -->
-      <ion-item 
-        *ngFor="let user of usuariosConChat" 
-        button 
-        detail 
-        [routerLink]="['/chat-admin', user.id]">
-        
+      <ion-item *ngFor="let user of usuariosConChat" button detail="false" [routerLink]="['/chat-admin', user.id]">
+
         <ion-avatar slot="start">
-          <!-- Usamos la primera letra del email como avatar simple -->
           <div class="chat-avatar">{{ user.email[0]?.toUpperCase() }}</div>
         </ion-avatar>
 
         <ion-label>
-          <!-- Mostrar nombre si existe, sino el email -->
           <h2>{{ user.nombre_completo || user.email }}</h2>
-          <p>Rol: {{ user.rol === 'usuario_registrado' ? 'Cliente' : 'Desconocido' }}</p>
+          <p>
+            <span class="role-badge">
+              {{ user.rol === 'usuario_registrado' ? 'Cliente' : 'Usuario' }}
+            </span>
+          </p>
         </ion-label>
-        
-        <ion-icon name="chatbubble-ellipses-outline" slot="end"></ion-icon>
+
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
       </ion-item>
-      
+
     </ion-list>
   </div>
 
-  <!-- Estado vacío (si no hay usuarios registrados) -->
-  <div *ngIf="usuariosConChat.length === 0" class="ion-text-center ion-padding-top">
-    <ion-icon name="chatbubbles-outline" size="large" color="medium"></ion-icon>
-    <p>Aún no hay clientes registrados para iniciar un chat.</p>
+  <div *ngIf="usuariosConChat.length === 0" class="empty-state">
+    <ion-icon name="chatbubbles-outline"></ion-icon>
+    <p>Aún no hay clientes registrados.</p>
   </div>
 
 </ion-content>

@@ -1,0 +1,146 @@
+// --- Variables Tigo ---
+$primary-blue: #00377d;
+$primary-green: #00a87f;
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$background-light: #f4f6f9;
+$white: #ffffff;
+
+// --- Header Personalizado ---
+ion-toolbar {
+  --background: #{$primary-blue};
+  --color: white;
+  
+  ion-title {
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+
+// --- Contenido General ---
+ion-content {
+  --background: #{$background-light};
+}
+
+// --- Título de la Sección ---
+.header-info {
+  margin-bottom: 25px;
+  padding-left: 5px;
+
+  h2 {
+    color: $primary-blue;
+    font-weight: 900;
+    font-size: 28px;
+    margin-bottom: 5px;
+  }
+
+  p {
+    color: $text-light;
+    font-size: 15px;
+    margin: 0;
+  }
+}
+
+// --- Lista Estilo Tarjetas ---
+ion-list {
+  background: transparent;
+  padding-bottom: 80px; // Espacio extra para que el botón (+) no tape el último ítem
+}
+
+ion-item-sliding {
+  margin-bottom: 16px; // Separación entre tarjetas
+  border-radius: 16px;
+  background: transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); // Sombra suave
+  overflow: hidden; // Para respetar los bordes redondeados
+}
+
+ion-item {
+  --background: #{$white};
+  --border-style: none; // Quitamos la línea divisoria por defecto
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  border-radius: 16px;
+
+  // Imagen del Plan
+  ion-thumbnail {
+    --size: 60px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f3f4f6; // Fondo gris por si la imagen es transparente
+    border: 1px solid #e5e7eb;
+    margin-right: 16px;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  // Textos
+  ion-label {
+    h2 {
+      font-weight: 800;
+      font-size: 18px;
+      color: $text-dark;
+      margin-bottom: 4px;
+    }
+
+    p {
+      color: $primary-blue; // Precio en azul para destacar
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+  }
+
+  // Badge de Estado (Píldora)
+  ion-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+
+    &[color="success"] {
+      --background: #{$primary-green}; // Verde Tigo
+      --color: white;
+    }
+    &[color="medium"] {
+      --background: #e5e7eb;
+      color: $text-light;
+    }
+  }
+}
+
+// --- Opciones Deslizantes (Editar/Borrar) ---
+ion-item-options {
+  border-radius: 0 16px 16px 0; // Redondear solo a la derecha
+}
+
+ion-item-option {
+  font-size: 18px;
+  // Asegura que los botones de opciones tengan buen contraste
+  &[color="warning"] { 
+    background: #f59e0b; 
+    color: white;
+  }
+  &[color="danger"] { 
+    background: #ef4444; 
+    color: white;
+  }
+}
+
+// --- Botón Flotante (FAB) ---
+ion-fab-button {
+  --background: #{$primary-green}; // Acción principal en verde
+  --background-activated: #{darken($primary-green, 10%)};
+  --color: white;
+  --box-shadow: 0 6px 16px rgba(0, 168, 127, 0.4);
+  
+  ion-icon {
+    font-size: 28px;
+  }
+}

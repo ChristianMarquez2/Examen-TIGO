@@ -1,11 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>
-      Catálogo Tigo
-    </ion-title>
+    <ion-title>Catálogo Tigo</ion-title>
     <ion-buttons slot="end">
-      <!-- Solo mostrar botón si es invitado -->
-      <ion-button *ngIf="isGuest" [routerLink]="['/login']" fill="solid" color="light">
+      <ion-button *ngIf="isGuest" [routerLink]="['/login']" fill="solid" color="light" shape="round">
         Ingresar
       </ion-button>
     </ion-buttons>
@@ -13,10 +10,11 @@
   
   <ion-toolbar color="primary">
     <ion-searchbar 
-      placeholder="Buscar plan..." 
+      placeholder="¿Qué plan buscas?" 
       [(ngModel)]="textoBuscar" 
       (ionChange)="filtrar()"
-      [debounce]="500">
+      [debounce]="500"
+      inputmode="search">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
@@ -24,7 +22,7 @@
 <ion-content class="ion-padding-top background-light">
 
   <div class="ion-padding-horizontal">
-    <ion-segment [(ngModel)]="segmentoFiltro" (ionChange)="filtrar()" scrollable>
+    <ion-segment [(ngModel)]="segmentoFiltro" (ionChange)="filtrar()" scrollable mode="ios">
       <ion-segment-button value="todos">
         <ion-label>Todos</ion-label>
       </ion-segment-button>
@@ -32,7 +30,7 @@
         <ion-label>Básico</ion-label>
       </ion-segment-button>
       <ion-segment-button value="Medio / Estándar">
-        <ion-label>Medio</ion-label>
+        <ion-label>Estándar</ion-label>
       </ion-segment-button>
       <ion-segment-button value="Premium / Alto">
         <ion-label>Premium</ion-label>
@@ -43,40 +41,48 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" *ngFor="let plan of planes">
+        
         <ion-card>
-          <div style="height: 140px; overflow: hidden;">
-            <img [src]="plan.imagen_url || 'assets/placeholder-plan.png'" style="width: 100%; object-fit: cover;">
+          <div class="plan-image-container">
+            <img [src]="plan.imagen_url || 'assets/placeholder-plan.png'" 
+                 onerror="this.src='assets/placeholder-plan.png'">
           </div>
           
           <ion-card-header>
             <ion-card-subtitle>{{ plan.segmento }}</ion-card-subtitle>
-            <ion-card-title color="primary">{{ plan.nombre }}</ion-card-title>
-            <h1 style="color: #00377d; font-weight: bold;">{{ plan.precio | currency }}<small>/mes</small></h1>
+            <ion-card-title>{{ plan.nombre }}</ion-card-title>
+            
+            <div class="price-tag">
+              {{ plan.precio | currency }}<small>/mes</small>
+            </div>
           </ion-card-header>
 
           <ion-card-content>
             <ion-list lines="none">
               <ion-item class="small-item">
                 <ion-icon name="wifi" slot="start"></ion-icon>
-                <ion-label>{{ plan.datos }}</ion-label>
+                <ion-label>{{ plan.datos }} de Internet</ion-label>
               </ion-item>
               <ion-item class="small-item">
                 <ion-icon name="call" slot="start"></ion-icon>
-                <ion-label>{{ plan.minutos }}</ion-label>
+                <ion-label>{{ plan.minutos }} Llamadas</ion-label>
               </ion-item>
             </ion-list>
             
-            <ion-button expand="block" [routerLink]="['/plan-detail', plan.id]" class="ion-margin-top">
+            <ion-button expand="block" [routerLink]="['/plan-detail', plan.id]" class="btn-contratar">
               Ver Detalles y Contratar
+              <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
             </ion-button>
           </ion-card-content>
         </ion-card>
+
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <div *ngIf="planes.length === 0" class="ion-text-center ion-padding">
-    <p>No se encontraron planes con esos filtros.</p>
+    <ion-icon name="search-outline" size="large" color="medium"></ion-icon>
+    <p>No encontramos planes en esta categoría.</p>
   </div>
 
 </ion-content>

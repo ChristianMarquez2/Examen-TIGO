@@ -1,42 +1,89 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <!-- Mantenemos defaultHref="/" para que siempre regrese al Landing o Home de invitado -->
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="/" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>Detalle del Plan</ion-title>
+    <ion-title>Detalles del Plan</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="plan" class="ion-padding">
-  <div class="ion-text-center">
-    <img [src]="plan.imagen_url || 'assets/placeholder-plan.png'" style="border-radius: 15px; height: 200px; object-fit: cover;">
-    <h1 color="primary">{{ plan.nombre }}</h1>
-    <h2 class="price">{{ plan.precio | currency }}<small>/mes</small></h2>
+<ion-content *ngIf="plan" [fullscreen]="true">
+  
+  <div class="plan-hero">
+    <div class="image-wrapper">
+        <img [src]="plan.imagen_url || 'assets/placeholder-plan.png'" onerror="this.src='assets/placeholder-plan.png'">
+    </div>
+    <h1>{{ plan.nombre }}</h1>
+    <div class="price-tag">
+        {{ plan.precio | currency }}<small>/mes</small>
+    </div>
   </div>
 
-  <ion-list inset>
-    <ion-item><ion-label><b>Datos:</b> {{ plan.datos }}</ion-label></ion-item>
-    <ion-item><ion-label><b>Minutos:</b> {{ plan.minutos }}</ion-label></ion-item>
-    <ion-item><ion-label><b>Velocidad:</b> {{ plan.velocidad }}</ion-label></ion-item>
-    <ion-item><ion-label><b>Redes Sociales:</b> {{ plan.redes_sociales }}</ion-label></ion-item>
-    <ion-item><ion-label><b>Roaming:</b> {{ plan.roaming }}</ion-label></ion-item>
+  <ion-list lines="none" class="specs-list">
+    
+    <ion-item class="spec-item">
+      <ion-icon name="wifi-outline" slot="start"></ion-icon>
+      <ion-label>
+        <b>Datos de Navegación</b>
+        <span>{{ plan.datos }}</span>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="spec-item">
+      <ion-icon name="call-outline" slot="start"></ion-icon>
+      <ion-label>
+        <b>Minutos</b>
+        <span>{{ plan.minutos }}</span>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="spec-item">
+      <ion-icon name="rocket-outline" slot="start"></ion-icon>
+      <ion-label>
+        <b>Velocidad</b>
+        <span>{{ plan.velocidad }}</span>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="spec-item">
+      <ion-icon name="logo-facebook" slot="start"></ion-icon>
+      <ion-label>
+        <b>Redes Sociales</b>
+        <span>{{ plan.redes_sociales }}</span>
+      </ion-label>
+    </ion-item>
+    
+    <ion-item class="spec-item">
+        <ion-icon name="airplane-outline" slot="start"></ion-icon>
+        <ion-label>
+          <b>Roaming</b>
+          <span>{{ plan.roaming }}</span>
+        </ion-label>
+      </ion-item>
+
   </ion-list>
 
-  <div class="ion-padding">
+  <div class="description-box">
+    <h3>Sobre este plan</h3>
     <p>{{ plan.descripcion }}</p>
   </div>
 
-  <ion-footer class="ion-no-border">
-    <ion-toolbar>
-      <ion-button expand="block" (click)="contratar()" color="secondary">
-        {{ isLoggedIn ? 'SOLICITAR CONTRATACIÓN' : 'INICIA SESIÓN PARA CONTRATAR' }}
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <div class="action-buttons">
+      
+      <ion-button expand="block" (click)="contratar()" class="btn-contract">
+        {{ isLoggedIn ? '¡LO QUIERO!' : 'INGRESA PARA CONTRATAR' }}
+        <ion-icon name="checkmark-circle" slot="end" *ngIf="isLoggedIn"></ion-icon>
       </ion-button>
       
-      <!-- CORRECCIÓN CLAVE: Botón de catálogo lleva a la ruta de Invitado o al Home de Tabs -->
-      <ion-button expand="block" [routerLink]="isLoggedIn ? ['/tabs/home'] : ['/guest-catalog']" fill="outline" color="primary">
-        VER MÁS PLANES
+      <ion-button expand="block" fill="clear" class="btn-more" 
+                  [routerLink]="isLoggedIn ? ['/tabs/home'] : ['/guest-catalog']">
+        Ver otros planes
       </ion-button>
-    </ion-toolbar>
-  </ion-footer>
-</ion-content>
+
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,63 +1,161 @@
-.custom-toolbar {
-    --background: var(--ion-color-primary);
-    color: white;
+// --- Variables Tigo ---
+$primary-blue: #00377d;
+$secondary-blue: #0056b3;
+$primary-green: #00a87f;
+$warning-orange: #f59e0b;
+$error-red: #ef4444;
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$background-light: #f4f6f9;
+$white: #ffffff;
+
+// --- Header ---
+ion-toolbar {
+  --background: #{$primary-blue};
+  --color: white;
+  
+  ion-title {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
 }
-.main-title {
-    color: white;
+
+// --- Fondo General ---
+ion-content {
+  --background: #{$background-light};
 }
+
 .list-container {
-    padding-top: 10px;
+  padding-top: 20px;
+  padding-bottom: 40px;
 }
-.custom-card {
+
+// --- Estado Vacío ---
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  opacity: 0.8;
+
+  ion-icon {
+    font-size: 80px;
+    color: #d1d5db;
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: $text-light;
+    font-size: 16px;
     margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
+  }
 
-.card-top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.plan-name {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: var(--ion-color-dark);
-    margin: 0;
-}
-
-.plan-date {
-    font-size: 0.85em;
-    color: var(--ion-color-medium);
-    margin: 5px 0 15px 0;
-}
-
-.status-badge {
-    padding: 4px 10px;
-    border-radius: 8px;
-    font-size: 0.7em;
+  ion-button {
+    --background: #{$primary-blue};
+    --border-radius: 20px;
+    text-transform: none;
     font-weight: 600;
-    margin-left: 10px;
-    white-space: nowrap;
+  }
 }
 
-/* Estilos de Estado */
-.status-pendiente {
-    background-color: var(--ion-color-warning);
-    color: #4b4b4b; /* Texto oscuro para el warning */
-}
-.status-aprobado {
-    background-color: var(--ion-color-success);
-    color: white;
-}
-.status-rechazado {
-    background-color: var(--ion-color-danger);
-    color: white;
+// --- Tarjeta de Contratación (Estilo Ticket) ---
+.custom-card {
+  background: $white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 55, 125, 0.08);
+  margin-bottom: 20px;
+  overflow: hidden; // Para que el borde lateral respete el radio
+  border-left: 6px solid #d1d5db; // Color por defecto (gris)
+  transition: transform 0.2s;
+
+  // Colores del borde lateral según estado
+  &.card-status-pendiente { border-left-color: $warning-orange; }
+  &.card-status-aprobado { border-left-color: $primary-green; }
+  &.card-status-rechazado { border-left-color: $error-red; }
+
+  ion-card-content {
+    padding: 20px 16px;
+  }
 }
 
+// --- Fila Superior (Título y Badge) ---
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+
+  .plan-name {
+    font-size: 18px;
+    font-weight: 800;
+    color: $primary-blue; // Título en azul Tigo
+    margin: 0;
+    flex: 1; // Ocupa el espacio disponible
+    padding-right: 10px;
+    line-height: 1.2;
+  }
+}
+
+// --- Badge de Estado (Píldora) ---
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+  &.badge-pendiente {
+    background-color: #fff7ed; // Fondo naranja muy claro
+    color: $warning-orange;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+  }
+  
+  &.badge-aprobado {
+    background-color: #ecfdf5; // Fondo verde muy claro
+    color: $primary-green;
+    border: 1px solid rgba(0, 168, 127, 0.2);
+  }
+  
+  &.badge-rechazado {
+    background-color: #fef2f2; // Fondo rojo muy claro
+    color: $error-red;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+}
+
+// --- Fecha ---
+.plan-date {
+  font-size: 13px;
+  color: $text-light;
+  margin: 0 0 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  
+  ion-icon { font-size: 14px; }
+}
+
+// --- Botón de Chat ---
 .chat-btn {
-    --border-radius: 8px;
-    --background: var(--ion-color-secondary);
-    margin-top: 10px;
+  --background: #eef2ff; // Azul muy pálido (Ghost button)
+  --color: #{$primary-blue};
+  --border-radius: 12px;
+  --box-shadow: none;
+  font-weight: 700;
+  height: 48px;
+  margin-top: 5px;
+  font-size: 15px;
+  text-transform: none;
+
+  ion-icon {
+    margin-right: 8px;
+    font-size: 20px;
+  }
+
+  // Si es un estado rechazado o pendiente, quizás el usuario quiera más ayuda
+  // Podemos dejarlo azul para que resalte
 }

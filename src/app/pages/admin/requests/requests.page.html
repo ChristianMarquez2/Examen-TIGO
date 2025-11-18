@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Solicitudes de Contratación</ion-title>
+  <ion-toolbar>
+    <ion-title>Solicitudes</ion-title>
     <ion-buttons slot="end">
-      <!-- Filtro rápido por estado (ngModel ya es válido) -->
-      <ion-select [(ngModel)]="filtroEstado" (ionChange)="cargarSolicitudes()" interface="popover" placeholder="Filtrar">
+      <ion-select [(ngModel)]="filtroEstado" (ionChange)="cargarSolicitudes()" interface="popover"
+        placeholder="Filtrar">
         <ion-select-option value="TODOS">Todas</ion-select-option>
         <ion-select-option value="PENDIENTE">Pendientes</ion-select-option>
         <ion-select-option value="APROBADO">Aprobadas</ion-select-option>
@@ -15,54 +15,58 @@
 
 <ion-content class="ion-padding">
 
-  <!-- Mensaje de no hay solicitudes -->
-  <div *ngIf="solicitudes.length === 0" class="ion-text-center ion-padding-top">
+  <div *ngIf="solicitudes.length === 0" class="empty-state">
+    <ion-icon name="folder-open-outline"></ion-icon>
     <p>No hay solicitudes {{ filtroEstado === 'PENDIENTE' ? 'pendientes' : 'en este momento' }}.</p>
-    <ion-icon name="happy-outline" size="large" color="medium"></ion-icon>
   </div>
 
-  <!-- Lista de Solicitudes -->
-  <ion-card *ngFor="let req of solicitudes" class="request-card">
+  <ion-card *ngFor="let req of solicitudes" class="request-card" [ngClass]="'status-' + req.estado">
     <ion-card-content>
+
       <div class="header-status">
-        <!-- Nombre del Cliente (Obtenido del JOIN profiles) -->
-        <h2 class="client-name">{{ req.profiles.nombre_completo || 'Cliente Nuevo' }}</h2>
-        
-        <!-- Estado con Badge -->
+        <div class="client-info">
+          <h2 class="client-name">{{ req.profiles.nombre_completo || 'Cliente Nuevo' }}</h2>
+          <div class="date-info">
+            <ion-icon name="calendar-outline" style="font-size: 12px;"></ion-icon>
+            {{ req.created_at | date:'mediumDate' }}
+          </div>
+        </div>
+
         <ion-badge [color]="req.estado === 'aprobado' ? 'success' : req.estado === 'rechazado' ? 'danger' : 'warning'">
-          {{ req.estado.toUpperCase() }}
+          {{ req.estado | uppercase }}
         </ion-badge>
       </div>
 
-      <!-- Información del Plan y Fecha -->
-      <p class="plan-info">Plan: {{ req.planes_moviles.nombre }}</p>
-      <p class="date-info">{{ req.created_at | date }}</p>
+      <div class="plan-details">
+        <ion-icon name="phone-portrait-outline"></ion-icon>
+        <p>Solicita: <span>{{ req.planes_moviles.nombre }}</span></p>
+      </div>
 
       <div class="action-buttons">
-        <!-- Botones de Acción (Solo activos si el estado es 'pendiente') -->
-        
-        <ion-button 
-          color="success" 
-          (click)="actualizarEstado(req.id, 'aprobado')"
-          [disabled]="req.estado !== 'pendiente'">
-          <ion-icon name="checkmark-circle-outline"></ion-icon> Aprobar
-        </ion-button>
-        
-        <ion-button 
-          color="danger" 
-          (click)="actualizarEstado(req.id, 'rechazado')"
-          [disabled]="req.estado !== 'pendiente'">
-          <ion-icon name="close-circle-outline"></ion-icon> Rechazar
+
+        <ion-button class="btn-chat" [routerLink]="['/chat-admin', req.user_id]">
+          <ion-icon name="chatbubbles-outline" slot="icon-only"></ion-icon>
         </ion-button>
 
-        <!-- Botón para ir al Chat (routerLink ya es válido y req.user_id existe) -->
-        <ion-button 
-          color="secondary" 
-          [routerLink]="['/chat-admin', req.user_id]">
-          <ion-icon name="chatbubbles-outline"></ion-icon>
-        </ion-button>
+        <ng-container *ngIf="req.estado === 'pendiente'; else historialActions">
+          <ion-button class="btn-reject" fill="outline" (click)="actualizarEstado(req.id, 'rechazado')">
+            Rechazar
+          </ion-button>
+
+          <ion-button class="btn-approve" expand="block" (click)="actualizarEstado(req.id, 'aprobado')">
+            Aprobar
+          </ion-button>
+        </ng-container>
+
+        <ng-template #historialActions>
+          <ion-button fill="clear" disabled class="btn-disabled-status">
+            {{ req.estado === 'aprobado' ? 'Aprobado' : 'Rechazado' }}
+          </ion-button>
+        </ng-template>
+
       </div>
 
     </ion-card-content>
   </ion-card>
+
 </ion-content>

@@ -1,86 +1,158 @@
+// --- Variables de Diseño Tigo ---
+$primary-blue: #00377d;
+$secondary-blue: #0056b3;
+$primary-green: #00a87f; // Verde para guardar
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$background-light: #f4f6f9;
+$input-bg: #f9fafb; // Fondo gris suave para inputs
+$white: #ffffff;
+
+// --- Configuración General ---
 .custom-background {
-  --background: #f4f7f9; // Fondo gris claro
+  --background: #{$background-light};
 }
 
 ion-toolbar {
-  --background: var(--ion-color-primary); // Azul Tigo
-  color: white;
-}
-
-.form-card {
-  margin: 10px 0 20px 0; // Margen superior para separarlo de la toolbar
-  border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); // Sombra más pronunciada
-  overflow: visible; // Permite que los elementos internos respiren
-}
-
-.section-title {
-  font-size: 1.2em;
-  font-weight: 700;
-  color: var(--ion-color-primary); // Título en color primario
-  margin-top: 25px;
-  margin-bottom: 15px;
-  padding-left: 5px;
-  border-left: 4px solid var(--ion-color-secondary); // Línea decorativa
-}
-
-// Estilo para todos los campos de entrada
-.input-item {
-  --padding-start: 0;
-  --inner-padding-end: 0;
-  --background: white; // Fondo blanco explícito
-  border-bottom: 1px solid #eee;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  transition: box-shadow 0.3s ease;
-
-  ion-input, ion-textarea, ion-select {
-    --padding-start: 10px;
+  --background: #{$primary-blue};
+  --color: white;
+  
+  ion-title {
+    font-weight: 700;
   }
 }
 
-.input-item.item-has-focus {
-  box-shadow: 0 0 5px rgba(0, 55, 125, 0.3); // Sombra al enfocar
+// --- Tarjeta del Formulario ---
+.form-card {
+  background: $white;
+  margin: 10px 0 80px 0; // Margen inferior extra para el botón fijo
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 55, 125, 0.08); // Sombra azulada suave
+  padding-bottom: 10px;
 }
 
+// --- Títulos de Sección ---
+.section-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: $primary-blue;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  
+  // Pequeño acento decorativo antes del título
+  &::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 20px;
+    background: $primary-green; // Acento verde
+    margin-right: 10px;
+    border-radius: 4px;
+  }
+}
+
+// --- Estilos de los Inputs (Moderna caja rellena) ---
+.input-item {
+  --background: #{$input-bg}; // Fondo gris claro por defecto
+  --border-radius: 12px;
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+  --min-height: 60px;
+  margin-bottom: 16px;
+  border: 1px solid transparent; // Borde invisible listo para transición
+  transition: all 0.3s ease;
+
+  // Label flotante
+  ion-label {
+    color: $text-light !important;
+    font-weight: 600;
+    font-size: 14px !important;
+    margin-bottom: 5px;
+  }
+
+  ion-input, ion-textarea, ion-select {
+    font-weight: 600;
+    color: $text-dark;
+    --padding-start: 0; // Reseteo
+  }
+
+  // Estado: Foco (Focus)
+  &.item-has-focus {
+    --background: #ffffff; // Se vuelve blanco
+    border-color: $secondary-blue; // Borde azul
+    box-shadow: 0 4px 12px rgba(0, 55, 125, 0.1); // Sombra al escribir
+    
+    ion-label {
+      color: $secondary-blue !important;
+    }
+  }
+}
+
+// Ajuste específico para textarea
 .textarea-item {
-  min-height: 120px; 
+  --min-height: 120px;
+  align-items: flex-start; // Alinear texto arriba
 }
 
+// --- Caja de Subida de Imagen ---
 .image-preview-box {
-  background: #e9f2ff; // Fondo azul muy claro
-  border: 2px dashed var(--ion-color-medium);
-  border-radius: 10px;
-  height: 180px; // Un poco más alto
+  background: #f0fdf9; // Fondo verde muy muy pálido
+  border: 2px dashed rgba(0, 168, 127, 0.3); // Borde discontinuo verde
+  border-radius: 16px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   cursor: pointer;
-  
+  transition: all 0.3s;
+  position: relative;
+
+  &:active {
+    background: #e6fffa;
+    transform: scale(0.98);
+  }
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 2;
   }
 
   .placeholder-content {
     text-align: center;
-    color: var(--ion-color-primary); // Texto de placeholder en color primario
+    z-index: 1;
+    
     ion-icon {
-        color: var(--ion-color-secondary); // Icono en color secundario
-        margin-bottom: 5px;
+      color: $primary-green;
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      color: $text-light;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0;
     }
   }
 }
 
+// --- Botón de Guardar ---
 .save-button {
-  --border-radius: 10px;
-  font-weight: bold;
-  height: 50px;
-  font-size: 1.1em;
-  // Degradado para que se vea premium
-  --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  --background: #{$primary-green}; // Verde Tigo (Acción positiva)
+  --background-activated: #{darken($primary-green, 10%)};
+  --border-radius: 14px;
+  --color: white;
+  font-weight: 700;
+  font-size: 18px;
+  height: 56px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px -5px rgba(0, 168, 127, 0.4); // Sombra verde
+  text-transform: none; // Evita mayúsculas forzadas
 }

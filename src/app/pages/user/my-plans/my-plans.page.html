@@ -1,40 +1,42 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar class="custom-toolbar" color="primary">
-    <div class="header-container">
-      <ion-title class="main-title">Mis Contrataciones</ion-title>
-    </div>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title class="main-title">Mis Contrataciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="main-content">
   <div class="list-container ion-padding">
     
-    <div *ngIf="contrataciones.length === 0" class="ion-text-center ion-padding-top">
-        <p>Aún no tienes contrataciones registradas.</p>
-        <ion-button [routerLink]="['/tabs/home']">Ver Planes</ion-button>
+    <div *ngIf="contrataciones.length === 0" class="empty-state">
+        <ion-icon name="receipt-outline"></ion-icon>
+        <p>No tienes planes activos o pendientes.</p>
+        <ion-button [routerLink]="['/tabs/home']" shape="round">
+           Explorar Planes
+        </ion-button>
     </div>
 
-    <ion-card *ngFor="let item of contrataciones" class="custom-card">
+    <ion-card *ngFor="let item of contrataciones" 
+              class="custom-card" 
+              [ngClass]="'card-status-' + item.estado">
+      
       <ion-card-content>
         <div class="card-top-row">
           <h2 class="plan-name">{{ item.planes_moviles.nombre }}</h2>
           
-          <!-- El estado debe estar en minúsculas en la BD ('pendiente', 'aprobado', etc) -->
           <span class="status-badge" 
-            [ngClass]="{
-              'status-pendiente': item.estado === 'pendiente',
-              'status-aprobado': item.estado === 'aprobado',
-              'status-rechazado': item.estado === 'rechazado'
-            }">
-            {{ item.estado | uppercase }}
+            [ngClass]="'badge-' + item.estado">
+            {{ item.estado }}
           </span>
         </div>
 
-        <p class="plan-date">Fecha: {{ item.created_at | date:'yyyy-MM-dd' }}</p>
+        <p class="plan-date">
+          <ion-icon name="calendar-clear-outline"></ion-icon>
+          Solicitado: {{ item.created_at | date:'dd MMM yyyy' }}
+        </p>
 
         <ion-button class="chat-btn" expand="block" (click)="irAlChat()">
-          <ion-icon name="chatbubble" slot="start"></ion-icon>
-          Chat con Asesor
+          <ion-icon name="chatbubbles-outline"></ion-icon>
+          Consultar con un Asesor
         </ion-button>
 
       </ion-card-content>

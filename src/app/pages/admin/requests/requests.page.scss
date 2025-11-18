@@ -1,63 +1,223 @@
-.request-card {
-  margin-bottom: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  
-  ion-card-content {
-    padding: 15px;
+// --- Variables Tigo ---
+$primary-blue: #00377d;
+$primary-green: #00a87f;
+$error-red: #ef4444;
+$warning-orange: #f59e0b;
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$background-light: #f4f6f9;
+$white: #ffffff;
+
+// --- Header y Filtros ---
+ion-toolbar {
+  --background: #{$primary-blue};
+  --color: white;
+
+  ion-select {
+    --placeholder-color: rgba(255, 255, 255, 0.9);
+    --placeholder-opacity: 1;
+    color: white;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.15); // Fondo translúcido para el filtro
+    border-radius: 20px;
+    padding: 0 10px;
+    margin-right: 8px;
   }
 }
 
+ion-content {
+  --background: #{$background-light};
+}
+
+// --- Estado Vacío (Empty State) ---
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  text-align: center;
+  opacity: 0.8;
+
+  ion-icon {
+    font-size: 80px;
+    color: #d1d5db;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 18px;
+    color: $text-light;
+    font-weight: 500;
+  }
+}
+
+// --- Tarjeta de Solicitud ---
+.request-card {
+  background: $white;
+  border-radius: 16px; // Más redondeado
+  box-shadow: 0 8px 20px rgba(0, 55, 125, 0.08); // Sombra azulada sutil
+  margin: 0 0 20px 0;
+  overflow: visible; // Para permitir badges que sobresalgan si quisieras
+  border-left: 5px solid transparent; // Preparado para borde de color
+
+  ion-card-content {
+    padding: 20px;
+  }
+
+  // Variación visual sutil según estado (Borde izquierdo)
+  &.status-pendiente {
+    border-left-color: $warning-orange;
+  }
+
+  &.status-aprobado {
+    border-left-color: $primary-green;
+  }
+
+  &.status-rechazado {
+    border-left-color: $error-red;
+  }
+}
+
+// --- Cabecera de la Tarjeta ---
 .header-status {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
+  align-items: flex-start;
+  margin-bottom: 12px;
 
-  .client-name {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: var(--ion-color-dark);
-    margin: 0;
+  .client-info {
+    h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: $primary-blue;
+      margin: 0 0 4px 0;
+    }
+
+    .date-info {
+      font-size: 12px;
+      color: $text-light;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
   }
 
+  // Badge estilo "Píldora"
   ion-badge {
-    padding: 5px 10px;
-    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    &[color="success"] {
+      --background: #{$primary-green};
+    }
+
+    &[color="warning"] {
+      --background: #{$warning-orange};
+      color: white;
+    }
+
+    &[color="danger"] {
+      --background: #{$error-red};
+    }
   }
 }
 
-.plan-info, .date-info {
-  font-size: 0.9em;
-  color: var(--ion-color-medium);
-  margin-bottom: 5px;
+// --- Detalles del Plan ---
+.plan-details {
+  background: #f8fafc; // Fondo gris muy claro
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+
+  ion-icon {
+    color: $primary-blue;
+    margin-right: 8px;
+    font-size: 20px;
+  }
+
+  p {
+    margin: 0;
+    color: $text-dark;
+    font-weight: 600;
+    font-size: 14px;
+
+    span {
+      font-weight: 400;
+      color: $text-light;
+    }
+  }
 }
 
+// --- Botones de Acción ---
 .action-buttons {
   display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
+  gap: 10px; // Espacio entre botones
 
   ion-button {
-    --padding-start: 10px;
-    --padding-end: 10px;
-    --border-radius: 8px;
-    font-size: 0.85em;
-    height: 38px;
-    margin: 0 4px; // Espacio entre botones
-    flex-grow: 1;
+    flex: 1; // Los botones toman el espacio disponible
+    height: 44px;
+    font-weight: 600;
+    font-size: 14px;
+    --border-radius: 10px;
+    --box-shadow: none; // Quitamos sombra por defecto para diseño más plano
 
-    ion-icon {
-      margin-right: 5px;
+    // Estilo específico para Aprobar
+    &.btn-approve {
+      --background: #{$primary-green};
+      --background-activated: #{darken($primary-green, 10%)};
     }
-    
-    // El botón de chat debe ser más pequeño
-    &:last-child {
-      flex-grow: 0;
-      width: 45px;
-      min-width: 45px;
+
+    // Estilo específico para Rechazar (Outline para no competir visualmente tanto)
+    &.btn-reject {
+      --color: #{$error-red};
+      --border-color: #{$error-red};
+      --background: transparent;
+      --background-activated: #fff1f2; // Rojo muy pálido al tocar
+    }
+
+    // Botón Chat (Cuadrado redondeado)
+    &.btn-chat {
+      flex: 0 0 50px; // Ancho fijo
+      --background: #e0e7ff; // Azul muy pálido
+      --color: #{$primary-blue};
+
+      ion-icon {
+        font-size: 22px;
+      }
+    }
+
+    // Dentro de .action-buttons...
+
+    ion-button.btn-chat {
+      --background: #e0e7ff; // Fondo azul muy claro
+      --color: #00377d; // Icono Azul Tigo
+      --border-radius: 10px;
       --padding-start: 0;
       --padding-end: 0;
+
+      // Forzar ancho fijo para que sea cuadrado
+      width: 48px;
+      flex: 0 0 48px;
+      height: 44px;
+
+      ion-icon {
+        font-size: 24px; // Tamaño grande del icono
+      }
+    }
+
+    // Estilo extra para cuando ya no hay acciones (aprobado/rechazado)
+    .btn-disabled-status {
+      width: 100%;
+      color: #6b7280;
+      font-weight: 500;
+      opacity: 1;
     }
   }
 }

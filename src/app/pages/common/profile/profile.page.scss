@@ -1,70 +1,165 @@
-.profile-card {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  padding: 20px;
-  margin-top: 20px;
+// --- Variables de Diseño Tigo ---
+$primary-blue: #00377d;
+$secondary-blue: #0056b3;
+$primary-green: #00a87f;
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$background-light: #f4f6f9;
+$white: #ffffff;
+$error-red: #ef4444;
 
+// --- Configuración General ---
+ion-content {
+  --background: #{$background-light};
+}
+
+ion-toolbar {
+  --background: #{$primary-blue};
+  --color: white;
+}
+
+// --- Tarjeta de Perfil Principal ---
+.profile-card {
+  background: $white;
+  border-radius: 24px; // Bordes muy suaves
+  box-shadow: 0 15px 35px rgba(0, 55, 125, 0.08); // Sombra azulada difusa
+  text-align: center;
+  padding: 40px 25px 30px; // Padding superior extra para el avatar
+  margin-top: 40px; // Espacio para que respire
+  position: relative;
+  overflow: visible; // Importante para efectos que salgan del contenedor
+
+  // --- Avatar con Borde Gradiente ---
   .profile-avatar {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 20px auto;
-    border: 3px solid var(--ion-color-primary);
-    padding: 3px;
+    width: 110px;
+    height: 110px;
+    margin: -80px auto 15px auto; // Margen negativo para subirlo un poco
+    padding: 4px; // Espacio para el borde
+    // Borde con gradiente Tigo (Azul a Verde)
+    background: linear-gradient(135deg, #{$primary-blue}, #{$primary-green});
     border-radius: 50%;
-    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 10;
 
     img {
       object-fit: cover;
       width: 100%;
       height: 100%;
+      border-radius: 50%;
+      border: 4px solid $white; // Borde blanco interno para separar
+      background-color: $white;
     }
   }
 
+  // --- Textos del Header ---
   .profile-name {
-    font-size: 1.6em;
-    font-weight: bold;
-    color: var(--ion-color-dark);
+    font-size: 22px;
+    font-weight: 800;
+    color: $text-dark;
     margin-bottom: 5px;
+    margin-top: 10px;
 
     span {
-      font-size: 0.7em;
-      color: var(--ion-color-medium);
-      font-weight: normal;
+      display: block; // Poner el rol debajo del nombre
+      font-size: 12px;
+      color: $primary-blue;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
     }
   }
 
   .profile-email {
-    font-size: 0.9em;
-    color: var(--ion-color-medium);
-    margin-bottom: 20px;
+    font-size: 14px;
+    color: $text-light;
+    margin-bottom: 30px;
+    font-weight: 500;
   }
 
+  // --- Lista de Detalles (Formulario) ---
   .profile-details-list {
-    background: transparent; // Para que no tenga fondo blanco dentro de la tarjeta
-    margin-bottom: 20px;
+    background: transparent;
+    padding: 0;
+    margin-bottom: 10px;
 
     ion-item {
-      --background: var(--ion-color-light); // Un fondo suave para los ítems
-      --border-radius: 10px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      --background: #f8fafc; // Fondo gris muy suave
+      --border-radius: 16px;
+      --padding-start: 16px;
+      --inner-padding-end: 16px;
+      --min-height: 64px;
+      margin-bottom: 12px;
+      box-shadow: none;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
 
-      ion-icon {
-        color: var(--ion-color-primary);
+      // Estilo cuando el input está habilitado para editar
+      &.item-interactive:not(.item-readonly) {
+         --background: $white;
+         border-color: #e5e7eb;
+         box-shadow: 0 4px 10px rgba(0,0,0,0.03);
       }
 
+      // Icono a la izquierda
+      ion-icon {
+        color: $primary-blue;
+        font-size: 20px;
+        margin-right: 8px;
+        opacity: 0.8;
+      }
+
+      // Estilos del Input
       ion-input {
-        --padding-start: 10px;
-        color: var(--ion-color-dark);
+        font-weight: 600;
+        color: $text-dark;
+        font-size: 15px;
+        --padding-top: 8px; // Ajuste vertical para label stacked
       }
     }
   }
 
+  // --- Botones de Acción ---
   ion-button {
-    margin-top: 15px;
-    --border-radius: 10px; // Bordes redondeados para los botones
-    font-weight: bold;
+    --border-radius: 14px;
+    font-weight: 700;
+    height: 52px;
+    font-size: 16px;
+    text-transform: none;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+    // Botón Editar (Azul)
+    &[color="primary"] {
+      --background: #{$primary-blue};
+    }
+
+    // Botón Guardar (Verde)
+    &[color="success"] {
+      --background: #{$primary-green};
+      --background-activated: #{darken($primary-green, 10%)};
+      box-shadow: 0 8px 20px -5px rgba(0, 168, 127, 0.4);
+    }
+
+    // Botón Cancelar (Gris)
+    &[color="medium"] {
+      --border-color: #d1d5db;
+      --color: #6b7280;
+      box-shadow: none;
+    }
+
+    // Botón Cerrar Sesión (Rojo Suave)
+    &[color="danger"] {
+      --background: #fee2e2; // Rojo muy pálido
+      --color: #ef4444; // Texto rojo fuerte
+      --background-activated: #fecaca;
+      box-shadow: none;
+      margin-top: 20px; // Separarlo del grupo principal
+      font-size: 15px;
+      
+      ion-icon {
+        margin-right: 8px;
+      }
+    }
   }
 }

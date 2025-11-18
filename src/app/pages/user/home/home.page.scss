@@ -1,0 +1,195 @@
+// --- Variables Tigo ---
+$primary-blue: #00377d;
+$secondary-blue: #0056b3;
+$primary-green: #00a87f;
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$background-light: #f4f6f9;
+$white: #ffffff;
+
+// --- Header y Buscador ---
+ion-toolbar {
+  --background: #{$primary-blue};
+  --color: white;
+  --border-width: 0; // Elimina líneas divisorias entre toolbars
+
+  // Título
+  ion-title {
+    font-weight: 800;
+    font-size: 22px;
+  }
+  
+  // Botón Login (Invitado)
+  ion-button {
+    --color: #{$primary-blue};
+    font-weight: 700;
+    --border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+}
+
+// Estilo especial para el Searchbar dentro del toolbar
+ion-searchbar {
+  --background: rgba(255, 255, 255, 0.15); // Translúcido
+  --color: white;
+  --placeholder-color: rgba(255, 255, 255, 0.8);
+  --icon-color: white;
+  --border-radius: 14px;
+  --box-shadow: none;
+  padding-bottom: 10px;
+
+  &.searchbar-has-focus {
+    --background: #ffffff;
+    --color: #{$text-dark};
+    --icon-color: #{$primary-blue};
+    --placeholder-color: #{$text-light};
+  }
+}
+
+// --- Contenido y Filtros ---
+.background-light {
+  --background: #{$background-light};
+}
+
+// Segmentos estilo "Chips/Píldoras"
+ion-segment {
+  background: transparent;
+  margin-bottom: 15px;
+  
+  ion-segment-button {
+    --background: #ffffff;
+    --color: #{$text-light};
+    --color-checked: white;
+    --background-checked: #{$secondary-blue};
+    --indicator-color: transparent; // Ocultar la línea de abajo estándar
+    
+    border-radius: 20px;
+    margin-right: 10px;
+    min-height: 40px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-weight: 600;
+    
+    // Ajuste para el layout del texto
+    ion-label {
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+// --- Tarjeta de Producto (Plan) ---
+ion-card {
+  background: $white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 55, 125, 0.08);
+  margin-bottom: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.03);
+  transition: transform 0.2s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  // Contenedor de Imagen
+  .plan-image-container {
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    background-color: #f3f4f6; // Placeholder mientras carga
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    // Overlay gradiente sutil sobre la imagen para que el texto resalte si lo hubiera
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+    }
+  }
+
+  ion-card-header {
+    padding-bottom: 0;
+
+    ion-card-subtitle {
+      color: $primary-green; // Segmento en verde
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 11px;
+      background: rgba(0, 168, 127, 0.1);
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    ion-card-title {
+      color: $text-dark;
+      font-weight: 800;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    // Precio Personalizado
+    .price-tag {
+      color: $primary-blue;
+      font-weight: 900;
+      font-size: 32px;
+      margin: 10px 0;
+      display: flex;
+      align-items: baseline;
+
+      small {
+        font-size: 14px;
+        font-weight: 500;
+        color: $text-light;
+        margin-left: 4px;
+      }
+    }
+  }
+
+  ion-card-content {
+    padding-top: 10px;
+
+    // Lista de características compacta
+    ion-list {
+      background: transparent;
+      padding: 0;
+    }
+
+    .small-item {
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      --min-height: 30px;
+      font-size: 14px;
+      color: $text-dark;
+      
+      ion-icon {
+        color: $secondary-blue; // Iconos azules
+        font-size: 18px;
+        margin-right: 10px;
+      }
+    }
+
+    // Botón de Acción
+    .btn-contratar {
+      --background: #{$primary-blue};
+      --border-radius: 12px;
+      font-weight: 700;
+      margin-top: 20px;
+      height: 48px;
+      box-shadow: 0 4px 12px rgba(0, 55, 125, 0.3);
+    }
+  }
+}

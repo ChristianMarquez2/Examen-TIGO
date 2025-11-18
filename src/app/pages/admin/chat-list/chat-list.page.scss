@@ -1,23 +1,145 @@
-.chat-avatar {
+// --- Variables Tigo ---
+$primary-blue: #00377d;
+$secondary-blue: #0056b3;
+$primary-green: #00a87f;
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$background-light: #f4f6f9;
+$white: #ffffff;
+
+// --- Header (Consistente con otras páginas) ---
+ion-toolbar {
+  --background: #{$primary-blue};
+  --color: white;
+  
+  ion-title {
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+
+// --- Fondo General ---
+ion-content {
+  --background: #{$background-light};
+}
+
+// --- Contenedor de la Lista ---
+ion-list {
+  background: transparent;
+  padding: 10px 16px; // Margen lateral para que las tarjetas no toquen los bordes
+}
+
+// --- Título de la Sección ---
+ion-list-header {
+  padding-left: 5px;
+  margin-bottom: 10px;
+  
+  ion-label {
+    color: $primary-blue;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-top: 15px;
+  }
+}
+
+// --- Item de Usuario (Tarjeta) ---
+ion-item {
+  --background: #{$white};
+  --border-radius: 16px;
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --min-height: 80px; // Altura generosa para dedo
+  margin-bottom: 12px; // Separación entre usuarios
+  box-shadow: 0 4px 12px rgba(0, 55, 125, 0.06); // Sombra azulada suave
+
+  // Efecto Hover/Active
+  &.item-interactive-disabled {
+    opacity: 0.6;
+  }
+}
+
+// --- Avatar Personalizado (Iniciales) ---
+ion-avatar {
+  width: 56px; // Un poco más grande que el default
+  height: 56px;
+  margin-right: 16px;
+
+  .chat-avatar {
     width: 100%;
     height: 100%;
-    background: var(--ion-color-secondary);
+    background: linear-gradient(135deg, #{$primary-blue}, #{$secondary-blue});
     color: white;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 55, 125, 0.2);
+  }
 }
 
-ion-item {
-    ion-label {
-        padding-top: 10px;
-        padding-bottom: 10px;
+// --- Textos (Nombre y Rol) ---
+ion-label {
+  h2 {
+    color: $text-dark;
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  p {
+    color: $text-light;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    // Estilo especial para la etiqueta de rol
+    .role-badge {
+      color: $primary-green;
+      font-weight: 600;
+      background: rgba(0, 168, 127, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 12px;
     }
+  }
 }
 
-ion-list-header {
-    font-weight: bold;
-    color: var(--ion-color-primary);
+// --- Icono de Chat (Flecha o Burbuja) ---
+ion-icon[slot="end"] {
+  color: #d1d5db; // Gris suave por defecto
+  font-size: 24px;
+  transition: color 0.3s;
+}
+
+// Cambiar color del icono al pasar el mouse o tocar
+ion-item:hover ion-icon[slot="end"] {
+  color: $secondary-blue;
+}
+
+// --- Estado Vacío (Empty State) ---
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh; // Centrado vertical total
+  
+  ion-icon {
+    font-size: 80px;
+    color: #e5e7eb;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    color: $text-light;
+    font-size: 16px;
+    font-weight: 500;
+  }
 }
