@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <!-- CORRECCIÓN: defaultHref cambiado a "/" para que lleve al Landing si no hay historial -->
+      <!-- Mantenemos defaultHref="/" para que siempre regrese al Landing o Home de invitado -->
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>Detalle del Plan</ion-title>
@@ -30,11 +30,12 @@
   <ion-footer class="ion-no-border">
     <ion-toolbar>
       <ion-button expand="block" (click)="contratar()" color="secondary">
-        {{ isLoggedIn ? 'CONTRATAR AHORA' : 'INICIA SESIÓN PARA CONTRATAR' }}
+        {{ isLoggedIn ? 'SOLICITAR CONTRATACIÓN' : 'INICIA SESIÓN PARA CONTRATAR' }}
       </ion-button>
-      <!-- Agregamos un botón para navegar al catálogo -->
-      <ion-button expand="block" [routerLink]="['/home']" color="primary">
-        VER CATÁLOGO
+      
+      <!-- CORRECCIÓN CLAVE: Botón de catálogo lleva a la ruta de Invitado o al Home de Tabs -->
+      <ion-button expand="block" [routerLink]="isLoggedIn ? ['/tabs/home'] : ['/guest-catalog']" fill="outline" color="primary">
+        VER MÁS PLANES
       </ion-button>
     </ion-toolbar>
   </ion-footer>

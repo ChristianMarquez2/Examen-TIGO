@@ -1,0 +1,63 @@
+.custom-toolbar {
+    --background: var(--ion-color-primary);
+    color: white;
+}
+.main-title {
+    color: white;
+}
+.list-container {
+    padding-top: 10px;
+}
+.custom-card {
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.plan-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--ion-color-dark);
+    margin: 0;
+}
+
+.plan-date {
+    font-size: 0.85em;
+    color: var(--ion-color-medium);
+    margin: 5px 0 15px 0;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.7em;
+    font-weight: 600;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+/* Estilos de Estado */
+.status-pendiente {
+    background-color: var(--ion-color-warning);
+    color: #4b4b4b; /* Texto oscuro para el warning */
+}
+.status-aprobado {
+    background-color: var(--ion-color-success);
+    color: white;
+}
+.status-rechazado {
+    background-color: var(--ion-color-danger);
+    color: white;
+}
+
+.chat-btn {
+    --border-radius: 8px;
+    --background: var(--ion-color-secondary);
+    margin-top: 10px;
+}

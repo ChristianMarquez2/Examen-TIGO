@@ -1,0 +1,63 @@
+.request-card {
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  ion-card-content {
+    padding: 15px;
+  }
+}
+
+.header-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+
+  .client-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--ion-color-dark);
+    margin: 0;
+  }
+
+  ion-badge {
+    padding: 5px 10px;
+    font-weight: 600;
+  }
+}
+
+.plan-info, .date-info {
+  font-size: 0.9em;
+  color: var(--ion-color-medium);
+  margin-bottom: 5px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+
+  ion-button {
+    --padding-start: 10px;
+    --padding-end: 10px;
+    --border-radius: 8px;
+    font-size: 0.85em;
+    height: 38px;
+    margin: 0 4px; // Espacio entre botones
+    flex-grow: 1;
+
+    ion-icon {
+      margin-right: 5px;
+    }
+    
+    // El botón de chat debe ser más pequeño
+    &:last-child {
+      flex-grow: 0;
+      width: 45px;
+      min-width: 45px;
+      --padding-start: 0;
+      --padding-end: 0;
+    }
+  }
+}

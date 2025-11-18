@@ -45,7 +45,7 @@ export class PlanDetailPage implements OnInit {
 
   async contratar() {
     if (!this.isLoggedIn) {
-      // Redirigir al login, pero guardar intención de retorno podría ser buena idea futura
+      // Redirigir al login
       this.router.navigate(['/login']);
       return;
     }
@@ -56,8 +56,6 @@ export class PlanDetailPage implements OnInit {
     });
     await loading.present();
 
-    // Insertar en tabla contrataciones
-    // Nota: Asegúrate que tu función contratarPlan en el servicio acepte (userId, planId)
     const { error } = await this.supabase.contratarPlan(this.userId!, this.plan!.id!);
 
     await loading.dismiss();
@@ -71,16 +69,17 @@ export class PlanDetailPage implements OnInit {
       await alert.present();
     } else {
       const alert = await this.alertCtrl.create({ 
-        header: '¡Felicidades!', 
-        subHeader: 'Plan Activado',
-        message: `Has contratado el plan ${this.plan?.nombre} exitosamente.`, 
+        header: '¡Solicitud enviada!', 
+        subHeader: 'Tu plan está pendiente de aprobación',
+        message: `Has solicitado el plan ${this.plan?.nombre}. Un asesor lo revisará pronto.`, 
         buttons: ['Ir a Mis Planes'],
         cssClass: 'custom-alert'
       });
       await alert.present();
       
       alert.onDidDismiss().then(() => {
-        this.router.navigate(['/my-plans']);
+        // CORRECCIÓN CLAVE: Redirigir a la ruta correcta de Tabs
+        this.router.navigate(['/tabs/my-plans']);
       });
     }
   }

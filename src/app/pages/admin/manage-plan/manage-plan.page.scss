@@ -1,0 +1,86 @@
+.custom-background {
+  --background: #f4f7f9; // Fondo gris claro
+}
+
+ion-toolbar {
+  --background: var(--ion-color-primary); // Azul Tigo
+  color: white;
+}
+
+.form-card {
+  margin: 10px 0 20px 0; // Margen superior para separarlo de la toolbar
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); // Sombra más pronunciada
+  overflow: visible; // Permite que los elementos internos respiren
+}
+
+.section-title {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--ion-color-primary); // Título en color primario
+  margin-top: 25px;
+  margin-bottom: 15px;
+  padding-left: 5px;
+  border-left: 4px solid var(--ion-color-secondary); // Línea decorativa
+}
+
+// Estilo para todos los campos de entrada
+.input-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --background: white; // Fondo blanco explícito
+  border-bottom: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.3s ease;
+
+  ion-input, ion-textarea, ion-select {
+    --padding-start: 10px;
+  }
+}
+
+.input-item.item-has-focus {
+  box-shadow: 0 0 5px rgba(0, 55, 125, 0.3); // Sombra al enfocar
+}
+
+.textarea-item {
+  min-height: 120px; 
+}
+
+.image-preview-box {
+  background: #e9f2ff; // Fondo azul muy claro
+  border: 2px dashed var(--ion-color-medium);
+  border-radius: 10px;
+  height: 180px; // Un poco más alto
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .placeholder-content {
+    text-align: center;
+    color: var(--ion-color-primary); // Texto de placeholder en color primario
+    ion-icon {
+        color: var(--ion-color-secondary); // Icono en color secundario
+        margin-bottom: 5px;
+    }
+  }
+}
+
+.save-button {
+  --border-radius: 10px;
+  font-weight: bold;
+  height: 50px;
+  font-size: 1.1em;
+  // Degradado para que se vea premium
+  --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}

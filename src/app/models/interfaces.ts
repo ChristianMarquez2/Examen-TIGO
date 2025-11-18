@@ -33,6 +33,7 @@ export interface MensajeChat {
   user_id: string;
   contenido: string;
   es_asesor: boolean;
+  local?: boolean; // Mensaje creado localmente (optimistic update) — no persistido aún
 }
 
 export interface Contratacion {

@@ -4,26 +4,29 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { IonicModule, LoadingController, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SupabaseService } from 'src/app/services/supabase.service';
-import { PhotoService } from 'src/app/services/photo.service'; // IMPORTANTE: Importar el servicio
+import { PhotoService } from 'src/app/services/photo.service';
 import { PlanMovil } from 'src/app/models/interfaces';
 
 @Component({
   selector: 'app-manage-plan',
   templateUrl: './manage-plan.page.html',
-  styleUrls: ['./manage-plan.page.scss'],
+  styleUrls: ['./manage-plan.page.scss'], // Usaremos este SCSS
   standalone: true,
   imports: [IonicModule, CommonModule, ReactiveFormsModule]
 })
 export class ManagePlanPage implements OnInit {
   planForm: FormGroup;
   planId: number | null = null;
-  imagenSeleccionada: any = null; // Para mostrar preview
-  archivoImagen: File | null = null; // Para enviar a Supabase
+  imagenSeleccionada: any = null;
+  archivoImagen: File | null = null;
+  
+  // Lista de segmentos para el Select
+  segmentos = ['Básico / Entrada', 'Medio / Estándar', 'Premium / Alto'];
 
   constructor(
     private fb: FormBuilder,
     private supabase: SupabaseService,
-    private photoService: PhotoService, // Inyección del servicio de fotos
+    private photoService: PhotoService,
     private route: ActivatedRoute,
     private router: Router,
     private loadingCtrl: LoadingController,
@@ -33,7 +36,7 @@ export class ManagePlanPage implements OnInit {
     this.planForm = this.fb.group({
       nombre: ['', Validators.required],
       precio: ['', [Validators.required, Validators.min(0)]],
-      segmento: ['Básico / Entrada', Validators.required],
+      segmento: [this.segmentos[0], Validators.required],
       datos: ['', Validators.required],
       minutos: ['', Validators.required],
       sms: ['Ilimitados'],
@@ -42,12 +45,13 @@ export class ManagePlanPage implements OnInit {
       whatsapp: [''],
       llamadas_internacionales: [''],
       roaming: ['No incluido'],
-      descripcion: ['']
+      descripcion: [''],
+      // Agregamos un campo PROMO opcional para manejar la imagen de la pantalla
+      promocion: [''], 
     });
   }
 
   async ngOnInit() {
-    // Verificar si estamos editando (viene un ID en la URL)
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.planId = +id;
@@ -56,26 +60,22 @@ export class ManagePlanPage implements OnInit {
   }
 
   async cargarDatosPlan(id: string) {
-    const { data, error } = await this.supabase.getPlanById(id);
+    const { data } = await this.supabase.getPlanById(id);
     if (data) {
       const plan = data as PlanMovil;
       this.planForm.patchValue(plan);
-      this.imagenSeleccionada = plan.imagen_url; // Mostrar imagen existente
+      this.imagenSeleccionada = plan.imagen_url; 
     }
   }
 
-  // === CÁMARA (ARQUITECTURA MODERNA) ===
-  // Ahora usamos el servicio en lugar de llamar a Camera directamente
   async tomarFoto() {
     const result = await this.photoService.tomarFoto();
-    
     if (result) {
-      this.imagenSeleccionada = result.webPath; // Para visualizar
-      this.archivoImagen = result.file;         // Para subir
+      this.imagenSeleccionada = result.webPath; 
+      this.archivoImagen = result.file;
     }
   }
 
-  // === GUARDAR ===
   async guardarPlan() {
     if (this.planForm.invalid) return;
 
@@ -86,17 +86,15 @@ export class ManagePlanPage implements OnInit {
 
     try {
       if (this.planId) {
-        // MODO EDICIÓN
-        // Nota: Si quisieras actualizar imagen en edit, implementa la lógica aquí
         await this.supabase.updatePlan(this.planId, datosPlan);
       } else {
-        // MODO CREACIÓN
         await this.supabase.createPlan(datosPlan, this.archivoImagen || undefined);
       }
 
       await loading.dismiss();
       this.mostrarToast('Plan guardado correctamente');
-      this.router.navigate(['/dashboard']);
+      // CORRECCIÓN: Redirigir al dashboard dentro de tabs
+      this.router.navigate(['/tabs/dashboard']);
 
     } catch (error: any) {
       await loading.dismiss();
